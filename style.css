@@ -224,28 +224,94 @@ body {
 /* =====================
    OUR WORK (SLIDER)
 ===================== */
+/* =====================
+   OUR WORK (FIXED SLIDER)
+===================== */
 .work-slider {
   overflow: hidden;
+  width: 100%;
   margin-top: 45px;
 }
 
 .work-track {
   display: flex;
-  animation: scroll 30s linear infinite;
+  gap: 20px;
+  width: max-content;
+  animation: scroll 28s linear infinite;
 }
 
 .work-track img {
   width: 260px;
   height: 160px;
-  margin-right: 25px;
+  flex-shrink: 0;
   border-radius: 14px;
   object-fit: cover;
   box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
+/* Smooth infinite scroll */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =====================
+   MOBILE FIX FOR SLIDER
+===================== */
+@media (max-width: 768px) {
+  .work-track {
+    animation: scroll 22s linear infinite;
+  }
+
+  .work-track img {
+    width: 220px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .work-track img {
+    width: 200px;
+    height: 130px;
+  }
+}
+/* =====================
+   HERO BUTTON OVERLAP FIX (MOBILE)
+===================== */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+/* Force buttons to stack on mobile */
+@media (max-width: 768px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    margin-left: 0 !important;
+    width: auto;
+    max-width: 260px;
+  }
+}
+
+/* Extra safety for very small screens */
+@media (max-width: 480px) {
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 /* =====================
@@ -447,4 +513,136 @@ footer {
   color: #f5b301;
   border-bottom: 2px solid #f5b301;
   padding-bottom: 3px;
+}
+/* =====================
+   MOBILE HAMBURGER MENU
+===================== */
+
+/* Hamburger icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: #111;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px 20px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    padding: 15px 0;
+  }
+
+  .nav a {
+    padding: 12px 0;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+}
+
+/* Desktop stays unchanged */
+@media (min-width: 769px) {
+  .nav {
+    display: flex !important;
+  }
+}
+/* =====================
+   CSS-ONLY HAMBURGER MENU
+===================== */
+
+/* Hide checkbox */
+#menu-toggle {
+  display: none;
+}
+
+/* Hamburger icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: #111;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+
+  .header {
+    padding: 14px 20px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 95px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+  }
+
+  .nav a {
+    padding: 14px 0;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* When checkbox is checked → show menu */
+  #menu-toggle:checked ~ .nav {
+    display: flex;
+  }
+}
+
+/* Desktop unchanged */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav {
+    display: flex !important;
+    position: static;
+  }
 }
